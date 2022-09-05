@@ -4,16 +4,18 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - master
+      - dev
 
 jobs:
   aws-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          ref: master
-      - uses: actions/setup-node@v1
+          ref: dev
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - run: npm install
       - run: npm run bundle
       - name: Deploy to Server
@@ -24,7 +26,7 @@ jobs:
           SOURCE: "deploy/"
           REMOTE_HOST: "project2.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
-          TARGET: "nodeapps/project2/2022/t3"
+          TARGET: "nodeapps/2022/project2/t3"
       - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         env:
