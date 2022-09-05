@@ -4,7 +4,7 @@ module.exports = {
   USER: "t32022",
   PASSWORD: "cs@oc2022t3",
   DB: "p2-t3-courses",
-  dialect: "mysql",
+  dialect: "mariadb",
   pool: {
     max: 5,
     min: 0,
