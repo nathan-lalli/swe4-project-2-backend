@@ -5,7 +5,7 @@ var cors = require("cors");
 var app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3303",
+  origin: "http://localhost:3003",
 };
 
 // view engine setup
@@ -30,7 +30,7 @@ db.sequelize
 require("./routes/courses.routes.js")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3303;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
