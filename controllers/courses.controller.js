@@ -7,10 +7,10 @@ const getPagination = (page, size) => {
   return { limit, offset };
 };
 const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: courses } = data;
+  const { count: totalItems, rows: Courses } = data;
   const currentPage = page ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
-  return { totalItems, courses, totalPages, currentPage };
+  return { totalItems, Courses, totalPages, currentPage };
 };
 
 // Create and Save a new Course
