@@ -170,7 +170,7 @@ exports.findName = (req, res) => {
   const { limit, offset } = getPagination(page, size);
   const name = req.params.name;
   Courses.findAndCountAll({
-    where: { [Op.substring]: [{ name: name }] },
+    where: { name: { [Op.substring]: name } },
     limit,
     offset,
   })
@@ -274,7 +274,7 @@ exports.findDesc = (req, res) => {
   const { limit, offset } = getPagination(page, size);
   const description = req.params.description;
   Courses.findAndCountAll({
-    where: { [Op.substring]: [{ description: description }] },
+    where: { description: { [Op.substring]: description } },
     limit,
     offset,
   })
@@ -300,7 +300,7 @@ exports.findSemester = (req, res) => {
   const { limit, offset } = getPagination(page, size);
   const semester = req.params.semester;
   Courses.findAndCountAll({
-    where: { [Op.substring]: [{ semester: semester }] },
+    where: { semester: { [Op.substring]: semester } },
     limit,
     offset,
   })
