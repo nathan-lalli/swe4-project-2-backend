@@ -8,25 +8,25 @@ module.exports = (app) => {
   // Retrieve all Courses with a lab
   router.get("/lab", courses.findAllLab);
   // Retrieve a single Course with course number
-  router.get("/:coursenumber", courses.findOne);
+  router.get("/coursenumber/:coursenumber", courses.findOne);
   // Update a Course with course number
-  router.put("/:coursenumber", courses.update);
+  router.put("/coursenumber/:coursenumber", courses.update);
   // Delete a Course with course number
-  router.delete("/:coursenumber", courses.delete);
+  router.delete("/coursenumber/:coursenumber", courses.delete);
   // Delete all Course
   router.delete("/", courses.deleteAll);
   //Retrieve all course based on a name
-  router.get("/:name", courses.findName);
+  router.get("/name/:name", courses.findName);
   //Retrieve based on a Department
-  router.get("/:department", courses.findDept);
+  router.get("/department/:department", courses.findDept);
   //Retrieve based on course level
-  router.get("/:level", courses.findLevel);
+  router.get("/level/:level", courses.findLevel);
   //Retrieve based on course hours
-  router.get("/:hours", courses.findHours);
+  router.get("/hours/:hours", courses.findHours);
   //Retrieve based on a course descripition
-  router.get("/:description", courses.findDesc);
+  router.get("/description/:description", courses.findDesc);
   //Retreive based on the semester a course is in
-  router.get("/:semester", courses.findSemester);
+  router.get("/semester/:semester", courses.findSemester);
 
   //The route that the API uses
   app.use("/course-t3/course", router);
