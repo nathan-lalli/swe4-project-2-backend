@@ -63,6 +63,8 @@ exports.findAll = (req, res) => {
 };
 // Find a single Course with a course number
 exports.findOne = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const coursenumber = req.params.coursenumber;
   Courses.findAndCountAll({
     where: { coursenumber: coursenumber },
@@ -164,6 +166,8 @@ exports.findAllLab = (req, res) => {
 };
 //Find course based on a name
 exports.findName = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const name = req.params.name;
   Courses.findAndCountAll({
     where: { [Op.substring]: [{ name: name }] },
@@ -188,6 +192,8 @@ exports.findName = (req, res) => {
 };
 //Find course based on a department
 exports.findDept = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const dept = req.params.dept;
   Courses.findAndCountAll({
     where: { dept: dept },
@@ -212,6 +218,8 @@ exports.findDept = (req, res) => {
 };
 //Find course based on the level
 exports.findLevel = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const level = req.params.level;
   Courses.findAndCountAll({
     where: { level: level },
@@ -236,6 +244,8 @@ exports.findLevel = (req, res) => {
 };
 //Find course based on the hours
 exports.findHours = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const hours = req.params.hours;
   Courses.findAndCountAll({
     where: { hours: hours },
@@ -260,6 +270,8 @@ exports.findHours = (req, res) => {
 };
 //Find course based on a description
 exports.findDesc = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const description = req.params.description;
   Courses.findAndCountAll({
     where: { [Op.substring]: [{ description: description }] },
@@ -284,6 +296,8 @@ exports.findDesc = (req, res) => {
 };
 //Find course based on a semester
 exports.findSemester = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
   const semester = req.params.semester;
   Courses.findAndCountAll({
     where: { [Op.substring]: [{ semester: semester }] },
