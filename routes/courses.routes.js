@@ -18,7 +18,7 @@ module.exports = (app) => {
   //Retrieve all course based on a name
   router.get("/name/:name", courses.findName);
   //Retrieve based on a Department
-  router.get("/department/:department", courses.findDept);
+  router.get("/dept/:dept", courses.findDept);
   //Retrieve based on course level
   router.get("/level/:level", courses.findLevel);
   //Retrieve based on course hours

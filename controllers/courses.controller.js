@@ -196,7 +196,7 @@ exports.findDept = (req, res) => {
   const { limit, offset } = getPagination(page, size);
   const dept = req.params.dept;
   Courses.findAndCountAll({
-    where: { dept: dept },
+    where: { dept: { [Op.substring]: dept } },
     limit,
     offset,
   })
