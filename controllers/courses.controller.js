@@ -162,3 +162,147 @@ exports.findAllLab = (req, res) => {
       });
     });
 };
+//Find course based on a name
+exports.findName = (req, res) => {
+  const name = req.params.name;
+  Courses.findAndCountAll({
+    where: { [Op.substring]: [{ name: name }] },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with name=${name}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with name=" + name,
+      });
+    });
+};
+//Find course based on a department
+exports.findDept = (req, res) => {
+  const dept = req.params.dept;
+  Courses.findAndCountAll({
+    where: { dept: dept },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with Department=${dept}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with Department=" + dept,
+      });
+    });
+};
+//Find course based on the level
+exports.findLevel = (req, res) => {
+  const level = req.params.level;
+  Courses.findAndCountAll({
+    where: { level: level },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with Level=${level}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with Level=" + level,
+      });
+    });
+};
+//Find course based on the hours
+exports.findHours = (req, res) => {
+  const hours = req.params.hours;
+  Courses.findAndCountAll({
+    where: { hours: hours },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with Hours=${hours}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with Hours=" + hours,
+      });
+    });
+};
+//Find course based on a description
+exports.findDesc = (req, res) => {
+  const description = req.params.description;
+  Courses.findAndCountAll({
+    where: { [Op.substring]: [{ description: description }] },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with Descritpion=${description}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with Description=" + description,
+      });
+    });
+};
+//Find course based on a semester
+exports.findSemester = (req, res) => {
+  const semester = req.params.semester;
+  Courses.findAndCountAll({
+    where: { [Op.substring]: [{ semester: semester }] },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find course with semester=${semester}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with semester=" + semester,
+      });
+    });
+};
