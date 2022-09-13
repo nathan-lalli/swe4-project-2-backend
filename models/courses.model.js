@@ -24,12 +24,15 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
       },
       prerequisite: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       lab: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       semester: {
+        type: Sequelize.STRING,
+      },
+      prerequisitecourse: {
         type: Sequelize.STRING,
       },
     },

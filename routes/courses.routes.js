@@ -27,6 +27,10 @@ module.exports = (app) => {
   router.get("/description/:description", courses.findDesc);
   //Retreive based on the semester a course is in
   router.get("/semester/:semester", courses.findSemester);
+  // Retrieve all Courses with a prerequisite
+  router.get("/prerequisite", courses.findAllPreReq);
+  // Retrieve all Courses with a specific prerequisite
+  router.get("/prerequisite/:prerequisitecourse", courses.findPreReqCourse);
 
   //The route that the API uses
   app.use("/course-t3/course", router);

@@ -33,6 +33,7 @@ exports.create = (req, res) => {
     prerequisite: req.body.prerequisite,
     lab: req.body.lab,
     semester: req.body.semester,
+    prerequisitecourse: req.body.prerequisitecourse,
   };
   // Save Course in the database
   Courses.create(courses)
@@ -153,7 +154,7 @@ exports.deleteAll = (req, res) => {
 exports.findAllLab = (req, res) => {
   const { page, size } = req.query;
   const { limit, offset } = getPagination(page, size);
-  Courses.findAndCountAll({ where: { lab: "true" }, limit, offset })
+  Courses.findAndCountAll({ where: { lab: true }, limit, offset })
     .then((data) => {
       const response = getPagingData(data, page, limit);
       res.send(response);
@@ -317,6 +318,47 @@ exports.findSemester = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: "Error retrieving Course with semester=" + semester,
+      });
+    });
+};
+// Find all courses with a prerequisite
+exports.findAllPreReq = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  Courses.findAndCountAll({ where: { prerequisite: true }, limit, offset })
+    .then((data) => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving courses.",
+      });
+    });
+};
+//Find course based on a prerequisitecourse
+exports.findPreReqCourse = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  const course = req.params.prerequisitecourse;
+  Courses.findAndCountAll({
+    where: { prerequisitecourse: { [Op.substring]: course } },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Course with Prerequisite=${course}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Course with Prerequisite=" + course,
       });
     });
 };
