@@ -5,10 +5,7 @@ var cors = require("cors");
 var app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3003",
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+  origin: "*",
 };
 
 // view engine setup
