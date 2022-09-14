@@ -6,6 +6,9 @@ var app = express();
 
 var corsOptions = {
   origin: "http://localhost:3003",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
 };
 
 // view engine setup
