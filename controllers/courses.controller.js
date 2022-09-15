@@ -362,3 +362,43 @@ exports.findPreReqCourse = (req, res) => {
       });
     });
 };
+//Search function
+exports.searchEverything = (req, res) => {
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  const search = req.params.search;
+  Courses.findAndCountAll({
+    distinct: true,
+    where: {
+      [Op.or]: [
+        { dept: { [Op.substring]: search } },
+        { coursenumber: { [Op.substring]: search } },
+        { level: { [Op.substring]: search } },
+        { hours: { [Op.substring]: search } },
+        { name: { [Op.substring]: search } },
+        { description: { [Op.substring]: search } },
+        { prerequisite: { [Op.substring]: search } },
+        { lab: { [Op.substring]: search } },
+        { semester: { [Op.substring]: search } },
+        { prerequisitecourse: { [Op.substring]: search } },
+      ],
+    },
+    limit,
+    offset,
+  })
+    .then((data) => {
+      if (data) {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      } else {
+        res.status(404).send({
+          message: `you stoopid`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "server stoopid",
+      });
+    });
+};

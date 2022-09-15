@@ -31,6 +31,8 @@ module.exports = (app) => {
   router.get("/prerequisite", courses.findAllPreReq);
   // Retrieve all Courses with a specific prerequisite
   router.get("/prerequisite/:prerequisitecourse", courses.findPreReqCourse);
+  // Search function
+  router.get("/search/:search", courses.searchEverything);
 
   //The route that the API uses
   app.use("/course-t3/course", router);
