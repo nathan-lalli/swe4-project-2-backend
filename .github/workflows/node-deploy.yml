@@ -10,10 +10,12 @@ jobs:
   aws-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: master
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - run: npm install
       - run: npm run bundle
       - name: Deploy to Server
@@ -24,7 +26,7 @@ jobs:
           SOURCE: "deploy/"
           REMOTE_HOST: "project2.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
-          TARGET: "nodeapps/project2/2022/t3"
+          TARGET: "nodeapps/2022/project2/t3"
       - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         env:
@@ -34,9 +36,9 @@ jobs:
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: false
           command: |
-            cd nodeapps/project2/2022/t3/nodeapp/swe4-project-2-backend
+            cd nodeapps/2022/project2/t3
             npm install
-            sudo systemctl stop course-backend
-            sudo cp course-backend-t3.service /lib/systemd/system/course-backend-t3.service
+            sudo systemctl stop course-t3-backend.service
+            sudo cp course-t3-backend.service /lib/systemd/system/course-t3-backend.service
             sudo systemctl daemon-reload
-            sudo systemctl start course-backend-t3
+            sudo systemctl start course-t3-backend.service
