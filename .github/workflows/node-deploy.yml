@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - dev
+      - master
 
 jobs:
   aws-deploy:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: master
       - uses: actions/setup-node@v3
         with:
           node-version: 16
